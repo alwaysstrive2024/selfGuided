@@ -1,0 +1,108 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 30px; background-color: #f0f2f5; color: #333; line-height: 1.6; }
+            .container { max-width: 1000px; margin: auto; }
+            .meta-card { 
+                background: white; padding: 25px; border-radius: 15px; 
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px;
+                border-top: 10px solid #28a745;
+            }
+            .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 15px; }
+            .info-label { font-size: 13px; color: #888; text-transform: uppercase; font-weight: bold; }
+            .info-value { font-size: 18px; font-weight: 600; color: #1a1a1a; display: block; margin-top: 5px; }
+
+            .visual-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
+            h3 { margin: 0 0 15px 0; font-size: 15px; color: #666; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+
+            .text-box { line-height: 2.5; font-size: 18px; }
+            .token { display: inline-block; padding: 0px 6px; margin: 2px; border-radius: 4px; border: 1px solid #eee; transition: 0.2s; cursor: help; }
+            .token:hover { transform: scale(1.1); z-index: 10; }
+
+            .explanation-box { background: #fffbe6; padding: 20px; border-radius: 10px; border: 1px solid #ffe58f; color: #856404; font-size: 16px; }
+            .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; color: white; font-weight: bold; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="meta-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1 style="margin:0;">Sample #11</h1>
+                    <span class="badge" style="background-color: #28a745;">CORRECT</span>
+                </div>
+                <div class="grid">
+                    <div><span class="info-label">Ground Truth</span><span class="info-value">Neutral (中性)</span></div>
+                    <div><span class="info-label">Model Prediction</span><span class="info-value">Neutral (中性)</span></div>
+                    <div><span class="info-label">Confidence</span><span class="info-value">86.04%</span></div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📝 Human Rationale (Text Explanation)</h3>
+                <div class="explanation-box">
+                    <strong>Interpretation:</strong> "Boys can refer to more individuals than two young boys. Playing football does not imply they are scoring a touchdown."
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🔍 Model Self-Attention Heatmap</h3>
+                <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;" title="Score: 0.0034">[CLS]</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0052">two</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0034">young</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0043">boys</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0063">of</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0038">opposing</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0089">teams</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0099">play</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0066">football</span>
+<span class="token" style="background-color: rgb(168, 203, 255); color: black;" title="Score: 0.0794">,</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0076">while</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0059">wearing</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0052">full</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0053">protection</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0032">uniforms</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0069">and</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0032">helmets</span>
+<span class="token" style="background-color: rgb(0, 102, 255); color: white;" title="Score: 0.2284">.</span>
+<span class="token" style="background-color: rgb(18, 112, 255); color: white;" title="Score: 0.2123">[SEP]</span>
+<span class="token" style="background-color: rgb(229, 239, 255); color: black;" title="Score: 0.0260">boys</span>
+<span class="token" style="background-color: rgb(167, 202, 255); color: black;" title="Score: 0.0801">scoring</span>
+<span class="token" style="background-color: rgb(216, 231, 255); color: black;" title="Score: 0.0374">a</span>
+<span class="token" style="background-color: rgb(219, 233, 255); color: black;" title="Score: 0.0344">touchdown</span>
+<span class="token" style="background-color: rgb(17, 112, 255); color: white;" title="Score: 0.2129">[SEP]</span>
+
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🎯 Ground Truth Rationales (Highlighted by Human)</h3>
+                <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;">[CLS]</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">two</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">young</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">boys</span>
+<span class="token" style="background-color: transparent; color: black;">of</span>
+<span class="token" style="background-color: transparent; color: black;">opposing</span>
+<span class="token" style="background-color: transparent; color: black;">teams</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">play</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">football</span>
+<span class="token" style="background-color: transparent; color: black;">,</span>
+<span class="token" style="background-color: transparent; color: black;">while</span>
+<span class="token" style="background-color: transparent; color: black;">wearing</span>
+<span class="token" style="background-color: transparent; color: black;">full</span>
+<span class="token" style="background-color: transparent; color: black;">protection</span>
+<span class="token" style="background-color: transparent; color: black;">uniforms</span>
+<span class="token" style="background-color: transparent; color: black;">and</span>
+<span class="token" style="background-color: transparent; color: black;">helmets</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">.</span>
+<span class="token" style="background-color: transparent; color: black;">[SEP]</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">boys</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">scoring</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">a</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">touchdown</span>
+<span class="token" style="background-color: transparent; color: black;">[SEP]</span>
+</div></div></div></body></html>

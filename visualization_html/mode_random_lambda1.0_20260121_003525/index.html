@@ -1,0 +1,35 @@
+
+    <html>
+    <head><title>Visualization Dashboard</title>
+    <style>
+        body { display: flex; height: 100vh; margin: 0; font-family: sans-serif; }
+        #sidebar { width: 200px; background: #f0f0f0; padding: 20px; overflow-y: auto; border-right: 1px solid #ccc; }
+        #content { flex: 1; }
+        iframe { width: 100%; height: 100%; border: none; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 10px; }
+        a { text-decoration: none; color: #007bff; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+    </style>
+    </head>
+    <body>
+        <div id="sidebar">
+            <h3>Sample List</h3>
+            <ul><li><a href="sample_0.html" target="content_frame">sample_0.html</a></li>
+<li><a href="sample_1.html" target="content_frame">sample_1.html</a></li>
+<li><a href="sample_2.html" target="content_frame">sample_2.html</a></li>
+<li><a href="sample_3.html" target="content_frame">sample_3.html</a></li>
+<li><a href="sample_4.html" target="content_frame">sample_4.html</a></li>
+<li><a href="sample_5.html" target="content_frame">sample_5.html</a></li>
+<li><a href="sample_6.html" target="content_frame">sample_6.html</a></li>
+<li><a href="sample_7.html" target="content_frame">sample_7.html</a></li>
+<li><a href="sample_8.html" target="content_frame">sample_8.html</a></li>
+<li><a href="sample_9.html" target="content_frame">sample_9.html</a></li>
+</ul>
+        </div>
+        <div id="content">
+            <iframe name="content_frame" src="sample_0.html"></iframe>
+        </div>
+    </body>
+    </html>
+    

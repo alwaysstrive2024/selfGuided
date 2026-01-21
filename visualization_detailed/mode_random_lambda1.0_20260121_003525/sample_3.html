@@ -1,0 +1,152 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 30px; background-color: #f0f2f5; color: #333; line-height: 1.6; }
+            .container { max-width: 1000px; margin: auto; }
+            .meta-card { 
+                background: white; padding: 25px; border-radius: 15px; 
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px;
+                border-top: 10px solid #28a745;
+            }
+            .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 15px; }
+            .info-label { font-size: 13px; color: #888; text-transform: uppercase; font-weight: bold; }
+            .info-value { font-size: 18px; font-weight: 600; color: #1a1a1a; display: block; margin-top: 5px; }
+
+            .visual-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
+            h3 { margin: 0 0 15px 0; font-size: 15px; color: #666; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+
+            .text-box { line-height: 2.5; font-size: 18px; }
+            .token { display: inline-block; padding: 0px 6px; margin: 2px; border-radius: 4px; border: 1px solid #eee; transition: 0.2s; cursor: help; }
+            .token:hover { transform: scale(1.1); z-index: 10; }
+
+            .explanation-box { background: #fffbe6; padding: 20px; border-radius: 10px; border: 1px solid #ffe58f; color: #856404; font-size: 16px; }
+            .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; color: white; font-weight: bold; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="meta-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1 style="margin:0;">Sample #3</h1>
+                    <span class="badge" style="background-color: #28a745;">CORRECT</span>
+                </div>
+                <div class="grid">
+                    <div><span class="info-label">Ground Truth</span><span class="info-value">Entailment (蕴含)</span></div>
+                    <div><span class="info-label">Model Prediction</span><span class="info-value">Entailment (蕴含)</span></div>
+                    <div><span class="info-label">Confidence</span><span class="info-value">95.07%</span></div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📝 Human Rationale (Text Explanation)</h3>
+                <div class="explanation-box">
+                    <strong>Interpretation:</strong> "Young children are kids. Jerseys with number 9 and 2 are numbered jerseys."
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🔍 Model Self-Attention Heatmap</h3>
+                <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;" title="Score: 0.0022">[CLS]</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0042">two</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0047">young</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0092">children</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0089">in</span>
+<span class="token" style="background-color: rgb(229, 239, 255); color: black;" title="Score: 0.0166">blue</span>
+<span class="token" style="background-color: rgb(241, 246, 255); color: black;" title="Score: 0.0100">jerseys</span>
+<span class="token" style="background-color: rgb(238, 244, 255); color: black;" title="Score: 0.0117">,</span>
+<span class="token" style="background-color: rgb(233, 242, 255); color: black;" title="Score: 0.0141">one</span>
+<span class="token" style="background-color: rgb(232, 241, 255); color: black;" title="Score: 0.0150">with</span>
+<span class="token" style="background-color: rgb(232, 241, 255); color: black;" title="Score: 0.0148">the</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0091">number</span>
+<span class="token" style="background-color: rgb(240, 246, 255); color: black;" title="Score: 0.0104">9</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0078">and</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0080">one</span>
+<span class="token" style="background-color: rgb(234, 242, 255); color: black;" title="Score: 0.0135">with</span>
+<span class="token" style="background-color: rgb(238, 245, 255); color: black;" title="Score: 0.0112">the</span>
+<span class="token" style="background-color: rgb(241, 247, 255); color: black;" title="Score: 0.0096">number</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0093">2</span>
+<span class="token" style="background-color: rgb(236, 243, 255); color: black;" title="Score: 0.0128">are</span>
+<span class="token" style="background-color: rgb(240, 246, 255); color: black;" title="Score: 0.0105">standing</span>
+<span class="token" style="background-color: rgb(235, 243, 255); color: black;" title="Score: 0.0133">on</span>
+<span class="token" style="background-color: rgb(228, 239, 255); color: black;" title="Score: 0.0169">wooden</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0094">steps</span>
+<span class="token" style="background-color: rgb(238, 244, 255); color: black;" title="Score: 0.0116">in</span>
+<span class="token" style="background-color: rgb(241, 247, 255); color: black;" title="Score: 0.0096">a</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0075">bathroom</span>
+<span class="token" style="background-color: rgb(240, 246, 255); color: black;" title="Score: 0.0106">and</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0062">washing</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0062">their</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0038">hands</span>
+<span class="token" style="background-color: rgb(241, 246, 255); color: black;" title="Score: 0.0097">in</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0077">a</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0045">sink</span>
+<span class="token" style="background-color: rgb(2, 103, 255); color: white;" title="Score: 0.1441">.</span>
+<span class="token" style="background-color: rgb(32, 121, 255); color: white;" title="Score: 0.1275">[SEP]</span>
+<span class="token" style="background-color: rgb(238, 245, 255); color: black;" title="Score: 0.0114">two</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0078">kids</span>
+<span class="token" style="background-color: rgb(215, 231, 255); color: black;" title="Score: 0.0246">in</span>
+<span class="token" style="background-color: rgb(176, 207, 255); color: black;" title="Score: 0.0464">numbered</span>
+<span class="token" style="background-color: rgb(240, 246, 255); color: black;" title="Score: 0.0103">jerseys</span>
+<span class="token" style="background-color: rgb(240, 246, 255); color: black;" title="Score: 0.0103">wash</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0085">their</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0054">hands</span>
+<span class="token" style="background-color: rgb(0, 102, 255); color: white;" title="Score: 0.1455">.</span>
+<span class="token" style="background-color: rgb(32, 121, 255); color: white;" title="Score: 0.1275">[SEP]</span>
+
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🎯 Ground Truth Rationales (Highlighted by Human)</h3>
+                <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;">[CLS]</span>
+<span class="token" style="background-color: transparent; color: black;">two</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">young</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">children</span>
+<span class="token" style="background-color: transparent; color: black;">in</span>
+<span class="token" style="background-color: transparent; color: black;">blue</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">jerseys</span>
+<span class="token" style="background-color: transparent; color: black;">,</span>
+<span class="token" style="background-color: transparent; color: black;">one</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">with</span>
+<span class="token" style="background-color: transparent; color: black;">the</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">number</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">9</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">and</span>
+<span class="token" style="background-color: transparent; color: black;">one</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">with</span>
+<span class="token" style="background-color: transparent; color: black;">the</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">number</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">2</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">are</span>
+<span class="token" style="background-color: transparent; color: black;">standing</span>
+<span class="token" style="background-color: transparent; color: black;">on</span>
+<span class="token" style="background-color: transparent; color: black;">wooden</span>
+<span class="token" style="background-color: transparent; color: black;">steps</span>
+<span class="token" style="background-color: transparent; color: black;">in</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">a</span>
+<span class="token" style="background-color: transparent; color: black;">bathroom</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">and</span>
+<span class="token" style="background-color: transparent; color: black;">washing</span>
+<span class="token" style="background-color: transparent; color: black;">their</span>
+<span class="token" style="background-color: transparent; color: black;">hands</span>
+<span class="token" style="background-color: transparent; color: black;">in</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">a</span>
+<span class="token" style="background-color: transparent; color: black;">sink</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">.</span>
+<span class="token" style="background-color: transparent; color: black;">[SEP]</span>
+<span class="token" style="background-color: transparent; color: black;">two</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">kids</span>
+<span class="token" style="background-color: transparent; color: black;">in</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">numbered</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">jerseys</span>
+<span class="token" style="background-color: transparent; color: black;">wash</span>
+<span class="token" style="background-color: transparent; color: black;">their</span>
+<span class="token" style="background-color: transparent; color: black;">hands</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">.</span>
+<span class="token" style="background-color: transparent; color: black;">[SEP]</span>
+</div></div></div></body></html>

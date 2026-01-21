@@ -1,0 +1,89 @@
+
+    <html>
+    <head>
+        <title>e-SNLI Explainability Dashboard</title>
+        <style>
+            body { display: flex; height: 100vh; margin: 0; font-family: sans-serif; background: #2c3e50; }
+            #sidebar { width: 260px; background: #fff; overflow-y: auto; border-right: 1px solid #ddd; padding: 15px; }
+            #content { flex: 1; background: #f0f2f5; }
+            iframe { width: 100%; height: 100%; border: none; }
+            .nav-item { 
+                display: block; padding: 12px; margin-bottom: 8px; 
+                background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333;
+                font-size: 14px; border: 1px solid transparent; transition: 0.2s;
+            }
+            .nav-item:hover { background: #e9ecef; border-color: #dee2e6; }
+            h2 { font-size: 18px; color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        </style>
+    </head>
+    <body>
+        <div id="sidebar">
+            <h2>Samples</h2>
+            
+        <a href="sample_0.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 0 
+            <small style="display:block; color:#999;">Neutral (中性)</small>
+        </a>
+        <a href="sample_1.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 1 
+            <small style="display:block; color:#999;">Entailment (蕴含)</small>
+        </a>
+        <a href="sample_2.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 2 
+            <small style="display:block; color:#999;">Contradiction (矛盾)</small>
+        </a>
+        <a href="sample_3.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 3 
+            <small style="display:block; color:#999;">Entailment (蕴含)</small>
+        </a>
+        <a href="sample_4.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 4 
+            <small style="display:block; color:#999;">Neutral (中性)</small>
+        </a>
+        <a href="sample_5.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 5 
+            <small style="display:block; color:#999;">Contradiction (矛盾)</small>
+        </a>
+        <a href="sample_6.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 6 
+            <small style="display:block; color:#999;">Contradiction (矛盾)</small>
+        </a>
+        <a href="sample_7.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 7 
+            <small style="display:block; color:#999;">Neutral (中性)</small>
+        </a>
+        <a href="sample_8.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 8 
+            <small style="display:block; color:#999;">Entailment (蕴含)</small>
+        </a>
+        <a href="sample_9.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 9 
+            <small style="display:block; color:#999;">Entailment (蕴含)</small>
+        </a>
+        <a href="sample_10.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 10 
+            <small style="display:block; color:#999;">Contradiction (矛盾)</small>
+        </a>
+        <a href="sample_11.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 11 
+            <small style="display:block; color:#999;">Neutral (中性)</small>
+        </a>
+        <a href="sample_12.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 12 
+            <small style="display:block; color:#999;">Neutral (中性)</small>
+        </a>
+        <a href="sample_13.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 13 
+            <small style="display:block; color:#999;">Entailment (蕴含)</small>
+        </a>
+        <a href="sample_14.html" target="viewer" class="nav-item">
+            <span style="color: #28a745">●</span> Sample 14 
+            <small style="display:block; color:#999;">Contradiction (矛盾)</small>
+        </a>
+        </div>
+        <div id="content">
+            <iframe name="viewer" src="sample_0.html"></iframe>
+        </div>
+    </body>
+    </html>
+    

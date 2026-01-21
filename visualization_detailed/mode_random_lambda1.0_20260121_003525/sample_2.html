@@ -1,0 +1,104 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 30px; background-color: #f0f2f5; color: #333; line-height: 1.6; }
+            .container { max-width: 1000px; margin: auto; }
+            .meta-card { 
+                background: white; padding: 25px; border-radius: 15px; 
+                box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px;
+                border-top: 10px solid #28a745;
+            }
+            .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 15px; }
+            .info-label { font-size: 13px; color: #888; text-transform: uppercase; font-weight: bold; }
+            .info-value { font-size: 18px; font-weight: 600; color: #1a1a1a; display: block; margin-top: 5px; }
+
+            .visual-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
+            h3 { margin: 0 0 15px 0; font-size: 15px; color: #666; text-transform: uppercase; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+
+            .text-box { line-height: 2.5; font-size: 18px; }
+            .token { display: inline-block; padding: 0px 6px; margin: 2px; border-radius: 4px; border: 1px solid #eee; transition: 0.2s; cursor: help; }
+            .token:hover { transform: scale(1.1); z-index: 10; }
+
+            .explanation-box { background: #fffbe6; padding: 20px; border-radius: 10px; border: 1px solid #ffe58f; color: #856404; font-size: 16px; }
+            .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; color: white; font-weight: bold; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="meta-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1 style="margin:0;">Sample #2</h1>
+                    <span class="badge" style="background-color: #28a745;">CORRECT</span>
+                </div>
+                <div class="grid">
+                    <div><span class="info-label">Ground Truth</span><span class="info-value">Contradiction (矛盾)</span></div>
+                    <div><span class="info-label">Model Prediction</span><span class="info-value">Contradiction (矛盾)</span></div>
+                    <div><span class="info-label">Confidence</span><span class="info-value">99.93%</span></div>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>📝 Human Rationale (Text Explanation)</h3>
+                <div class="explanation-box">
+                    <strong>Interpretation:</strong> "In the first sentence there is an action of affection between women while on the second sentence there is a fight between men."
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🔍 Model Self-Attention Heatmap</h3>
+                <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;" title="Score: 0.0083">[CLS]</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0036">two</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0041">women</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0043">are</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0054">embracing</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0047">while</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0038">holding</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0051">to</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0081">go</span>
+<span class="token" style="background-color: transparent; color: black;" title="Score: 0.0088">packages</span>
+<span class="token" style="background-color: rgb(3, 104, 255); color: white;" title="Score: 0.1113">.</span>
+<span class="token" style="background-color: rgb(19, 113, 255); color: white;" title="Score: 0.1046">[SEP]</span>
+<span class="token" style="background-color: rgb(88, 154, 255); color: white;" title="Score: 0.0751">the</span>
+<span class="token" style="background-color: rgb(84, 152, 255); color: white;" title="Score: 0.0766">men</span>
+<span class="token" style="background-color: rgb(135, 183, 255); color: black;" title="Score: 0.0548">are</span>
+<span class="token" style="background-color: rgb(95, 159, 255); color: white;" title="Score: 0.0720">fighting</span>
+<span class="token" style="background-color: rgb(109, 167, 255); color: white;" title="Score: 0.0661">outside</span>
+<span class="token" style="background-color: rgb(133, 182, 255); color: black;" title="Score: 0.0555">a</span>
+<span class="token" style="background-color: rgb(119, 173, 255); color: white;" title="Score: 0.0615">del</span>
+<span class="token" style="background-color: rgb(149, 191, 255); color: black;" title="Score: 0.0488">##i</span>
+<span class="token" style="background-color: rgb(0, 102, 255); color: white;" title="Score: 0.1130">.</span>
+<span class="token" style="background-color: rgb(20, 114, 255); color: white;" title="Score: 0.1044">[SEP]</span>
+
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <h3>🎯 Ground Truth Rationales (Highlighted by Human)</h3>
+                <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;">[CLS]</span>
+<span class="token" style="background-color: transparent; color: black;">two</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">women</span>
+<span class="token" style="background-color: transparent; color: black;">are</span>
+<span class="token" style="background-color: transparent; color: black;">embracing</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">while</span>
+<span class="token" style="background-color: transparent; color: black;">holding</span>
+<span class="token" style="background-color: transparent; color: black;">to</span>
+<span class="token" style="background-color: transparent; color: black;">go</span>
+<span class="token" style="background-color: transparent; color: black;">packages</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">.</span>
+<span class="token" style="background-color: transparent; color: black;">[SEP]</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">the</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">men</span>
+<span class="token" style="background-color: transparent; color: black;">are</span>
+<span class="token" style="background-color: transparent; color: black;">fighting</span>
+<span class="token" style="background-color: transparent; color: black;">outside</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">a</span>
+<span class="token" style="background-color: transparent; color: black;">del</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">##i</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;">.</span>
+<span class="token" style="background-color: transparent; color: black;">[SEP]</span>
+</div></div></div></body></html>

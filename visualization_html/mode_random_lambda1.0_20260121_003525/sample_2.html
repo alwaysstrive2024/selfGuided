@@ -1,0 +1,94 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sample 2</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f9f9f9; }
+            .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px; }
+            h2 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+            h3 { margin-top: 0; font-size: 16px; color: #555; }
+            .text-box { line-height: 2.2; font-size: 16px; }
+            .token { 
+                display: inline-block; 
+                padding: 2px 5px; 
+                margin: 2px; 
+                border-radius: 4px; 
+                border: 1px solid #eee;
+                cursor: default;
+                position: relative;
+            }
+            /* Tooltip 样式 */
+            .token:hover::after {
+                content: attr(data-score);
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #333;
+                color: #fff;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 12px;
+                white-space: nowrap;
+                z-index: 10;
+                pointer-events: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Sample ID: 2</h2>
+    
+        <div class="card">
+            <h3>🔹 Model Attention Prediction (Blue)</h3>
+            <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;" data-score="0.0083">[CLS]</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0036">two</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0041">women</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0043">are</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0054">embracing</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0047">while</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0038">holding</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0051">to</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0081">go</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0088">packages</span>
+<span class="token" style="background-color: rgb(3, 129, 255); color: white;" data-score="0.1113">.</span>
+<span class="token" style="background-color: rgb(19, 137, 255); color: white;" data-score="0.1046">[SEP]</span>
+<span class="token" style="background-color: rgb(88, 171, 255); color: black;" data-score="0.0751">the</span>
+<span class="token" style="background-color: rgb(84, 169, 255); color: black;" data-score="0.0766">men</span>
+<span class="token" style="background-color: rgb(135, 195, 255); color: black;" data-score="0.0548">are</span>
+<span class="token" style="background-color: rgb(95, 175, 255); color: black;" data-score="0.0720">fighting</span>
+<span class="token" style="background-color: rgb(109, 182, 255); color: black;" data-score="0.0661">outside</span>
+<span class="token" style="background-color: rgb(133, 194, 255); color: black;" data-score="0.0555">a</span>
+<span class="token" style="background-color: rgb(119, 187, 255); color: black;" data-score="0.0615">del</span>
+<span class="token" style="background-color: rgb(149, 202, 255); color: black;" data-score="0.0488">##i</span>
+<span class="token" style="background-color: rgb(0, 127, 255); color: white;" data-score="0.1130">.</span>
+<span class="token" style="background-color: rgb(20, 137, 255); color: white;" data-score="0.1044">[SEP]</span>
+</div></div>
+        <div class="card">
+            <h3>🔸 Ground Truth / Gold Mask (Red)</h3>
+            <div class="text-box">
+    <span class="token" style="background-color: transparent; color: black;" data-score="0.0">[CLS]</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">two</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">women</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">are</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">embracing</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">while</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">holding</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">to</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">go</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">packages</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">.</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">[SEP]</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">the</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">men</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">are</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">fighting</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">outside</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">a</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">del</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">##i</span>
+<span class="token" style="background-color: rgb(255, 0, 0); color: white;" data-score="1.0">.</span>
+<span class="token" style="background-color: transparent; color: black;" data-score="0.0">[SEP]</span>
+</div></div></body></html>
