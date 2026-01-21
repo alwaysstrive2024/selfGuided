@@ -1,0 +1,4 @@
+Model,Accuracy,AUPRC,Comprehensiveness,Sufficiency
+Guided Model,0.9067,0.6561,0.3199,0.448
+Vanilla Model,0.9011,0.4881,0.2135,0.3636
+Random Model,0.8926,0.3053,0.1535,0.3413
