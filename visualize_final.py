@@ -10,7 +10,6 @@ from transformers import BertTokenizerFast, BertForSequenceClassification
 from transformers.models.bert.modeling_bert import BertSelfAttention
 from datasets import load_from_disk
 
-# ====================== 1. 核心配置 ======================
 MODELS_CONFIG = [
     {"name": "Guided Model", "id": "mode_guided_lambda1.0_20260120_184228", "color": "blue"},
     {"name": "Vanilla Model", "id": "mode_vanilla_lambda1.0_20260120_215539", "color": "green"},
@@ -70,8 +69,6 @@ def main():
     dataset = load_from_disk(DATA_CACHE)["validation"]
     val_loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=False, collate_fn=collate_fn)
 
-    # 存储所有推理结果
-    # 结构: [ { "sample_id": 0, "models": [ {name, pred, conf, attn}, ... ] }, ... ]
     all_results = []
     for i in range(len(dataset)):
         all_results.append({
@@ -83,7 +80,6 @@ def main():
             "model_outputs": []
         })
 
-    # --- A. 批量推理 ---
     for m_cfg in MODELS_CONFIG:
         path = os.path.join(CHECKPOINTS_DIR, m_cfg['id'], "best_model")
         print(f"\n>> Inferencing with {m_cfg['name']}...")
