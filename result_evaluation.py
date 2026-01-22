@@ -146,8 +146,8 @@ def main():
         final_results.append(res)
 
     df = pd.DataFrame(final_results)
-    df.to_csv("final_aligned_evaluation.csv", index=False)
-    print("\n>> final_aligned_evaluation.csv")
+    df.to_csv("result_eval.csv", index=False)
+    print("\n>> result_eval.csv")
 
 
 if __name__ == "__main__":

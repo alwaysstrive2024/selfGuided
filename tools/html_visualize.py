@@ -7,26 +7,21 @@ from transformers import BertTokenizerFast, BertForSequenceClassification
 from transformers.models.bert.modeling_bert import BertSelfAttention
 from datasets import load_from_disk
 
-# ====================== 1. 配置参数 ======================
-RUN_ID = "mode_random_lambda1.0_20260121_003525"  # 替换为你的实际文件夹名
+RUN_ID = "mode_random_lambda1.0_20260121_003525"
 CHECKPOINTS_DIR = "../checkpoints"
 RUN_DIR = os.path.join(CHECKPOINTS_DIR, RUN_ID)
 BEST_MODEL_PATH = os.path.join(RUN_DIR, "best_model")
 DATA_CACHE = "./data_cache/esnli_tokenized"
 
-# 输出目录
 VIS_DIR = os.path.join("./visualization_detailed", RUN_ID)
 os.makedirs(VIS_DIR, exist_ok=True)
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-NUM_SAMPLES = 15  # 想要生成的样本数量
+NUM_SAMPLES = 15
 
-# e-SNLI 标签映射
-LABEL_MAP = {0: "Entailment (蕴含)", 1: "Neutral (中性)", 2: "Contradiction (矛盾)"}
+LABEL_MAP = {0: "Entailment", 1: "Neutral", 2: "Contradiction"}
 
 
-# ====================== 2. 模型结构定义 ======================
-# 必须保留此定义以确保能够正确加载包含自定义层权重的模型
 class GuidedBertSelfAttention(BertSelfAttention):
     def __init__(self, config, lambda_guidance=1.0):
         super().__init__(config)
@@ -46,18 +41,14 @@ class GuidedBertSelfAttention(BertSelfAttention):
         return outputs
 
 
-# ====================== 3. HTML 渲染核心逻辑 ======================
-
 def get_color_style(score, is_gold=False):
-    """根据分数生成 CSS 颜色样式"""
     score = max(0.0, min(1.0, score))
-    if score < 0.05: return "background-color: transparent; color: black;"
+    if score < 0.05:
+        return "background-color: transparent; color: black;"
 
     if is_gold:
-        # 红色调 (Human)
         r, g, b = 255, int(255 * (1 - score)), int(255 * (1 - score))
     else:
-        # 蓝色调 (Model)
         r, g, b = int(255 * (1 - score)), int(255 * (1 - score * 0.6)), 255
 
     text_color = "white" if score > 0.5 else "black"
@@ -65,7 +56,6 @@ def get_color_style(score, is_gold=False):
 
 
 def save_detailed_html(sample_id, data, output_dir):
-    """生成单个样本的详细 HTML 页面"""
     filename = f"sample_{sample_id}.html"
     filepath = os.path.join(output_dir, filename)
 
@@ -126,7 +116,6 @@ def save_detailed_html(sample_id, data, output_dir):
                 <h3>🔍 Model Self-Attention Heatmap</h3>
                 <div class="text-box">
     """
-    # 渲染模型 Attention
     for t, raw_s, norm_s in zip(data['tokens'], data['attn_scores'], data['norm_attn']):
         style = get_color_style(norm_s, is_gold=False)
         html_content += f'<span class="token" style="{style}" title="Score: {raw_s:.4f}">{html.escape(t)}</span>\n'
@@ -139,7 +128,6 @@ def save_detailed_html(sample_id, data, output_dir):
                 <h3>🎯 Ground Truth Rationales (Highlighted by Human)</h3>
                 <div class="text-box">
     """
-    # 渲染 Gold Mask
     for t, gold_s in zip(data['tokens'], data['gold_mask']):
         style = get_color_style(gold_s, is_gold=True)
         html_content += f'<span class="token" style="{style}">{html.escape(t)}</span>\n'
@@ -151,7 +139,6 @@ def save_detailed_html(sample_id, data, output_dir):
 
 
 def create_index_html(results, output_dir):
-    """创建左侧列表、右侧内容的预览页面"""
     index_path = os.path.join(output_dir, "index.html")
     list_items = ""
     for r in results:
@@ -195,13 +182,10 @@ def create_index_html(results, output_dir):
         f.write(html_code)
 
 
-# ====================== 4. 主程序 ======================
-
 def main():
     print(f">> Loading model and tokenizer from {BEST_MODEL_PATH}...")
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
 
-    # 自动处理自定义 Attention 类加载问题
     model = BertForSequenceClassification.from_pretrained(
         BEST_MODEL_PATH,
         output_attentions=True,
@@ -217,19 +201,15 @@ def main():
     for i in range(NUM_SAMPLES):
         example = val_dataset[i]
 
-        # 推理
         input_ids = torch.tensor(example["input_ids"]).unsqueeze(0).to(DEVICE)
         mask = torch.tensor(example["attention_mask"]).unsqueeze(0).to(DEVICE)
 
         with torch.no_grad():
             outputs = model(input_ids=input_ids, attention_mask=mask)
-            # 获取预测
             probs = F.softmax(outputs.logits, dim=-1)
             conf, pred_idx = torch.max(probs, dim=-1)
-            # 获取最后一层 Attention 并平均所有 Head
             attn = outputs.attentions[-1].mean(dim=1).squeeze(0).mean(dim=0)
 
-        # 整理数据
         tokens_raw = tokenizer.convert_ids_to_tokens(example["input_ids"])
         valid_indices = [idx for idx, t in enumerate(tokens_raw) if t != '[PAD]']
 
@@ -237,12 +217,10 @@ def main():
         f_attn = attn.cpu().numpy()[valid_indices]
         f_gold = np.array(example["gold_mask"])[valid_indices]
 
-        # 注意力归一化以便着色
         norm_attn = (f_attn - f_attn.min()) / (f_attn.max() - f_attn.min() + 1e-9)
 
-        # 提取解释文本（检查 e-SNLI 的常见字段名）
         explanation = example.get("explanation_1", "N/A")
-        if explanation == "N/A":  # 兼容某些缓存版本
+        if explanation == "N/A":
             explanation = example.get("explanation", "No textual explanation found.")
 
         data_payload = {
@@ -256,7 +234,6 @@ def main():
             "explanation": explanation
         }
 
-        # 生成页面
         fname = save_detailed_html(i, data_payload, VIS_DIR)
 
         generated_info.append({
@@ -267,10 +244,9 @@ def main():
         })
         print(f"[Sample {i}] Predicted: {data_payload['pred_label']} | Correct: {example['label'] == pred_idx.item()}")
 
-    # 创建仪表盘索引
     create_index_html(generated_info, VIS_DIR)
 
-    print(f"\n✨ 可视化已完成！请用浏览器打开以下路径查看结果：")
+    print(f"\n✨ Visualization completed! Open the following path in a browser to view results:")
     print(f"{os.path.abspath(os.path.join(VIS_DIR, 'index.html'))}")
 
 

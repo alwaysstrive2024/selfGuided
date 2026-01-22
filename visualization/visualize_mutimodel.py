@@ -7,8 +7,6 @@ from transformers import BertTokenizerFast, BertForSequenceClassification
 from transformers.models.bert.modeling_bert import BertSelfAttention
 from datasets import load_from_disk
 
-# ====================== 1. 核心配置 ======================
-# 定义你要对比的模型列表
 MODELS_CONFIG = [
     {"name": "Guided Model", "id": "mode_guided_lambda1.0_20260120_184228"},
     {"name": "Vanilla Model", "id": "mode_vanilla_lambda1.0_20260120_215539"},
@@ -26,7 +24,6 @@ NUM_SAMPLES = 100
 LABEL_MAP = {0: "Entailment", 1: "Neutral", 2: "Contradiction"}
 
 
-# ====================== 2. 模型结构定义 ======================
 class GuidedBertSelfAttention(BertSelfAttention):
     def __init__(self, config, lambda_guidance=1.0):
         super().__init__(config)
@@ -45,31 +42,27 @@ class GuidedBertSelfAttention(BertSelfAttention):
         return outputs
 
 
-# ====================== 3. 辅助函数 ======================
 def get_color_style(score, color_type='blue'):
     score = max(0.0, min(1.0, score))
     if score < 0.05: return "background-color: transparent; color: black;"
-    if color_type == 'red':  # Human
+    if color_type == 'red':
         r, g, b = 255, int(255 * (1 - score)), int(255 * (1 - score))
-    elif color_type == 'blue':  # Guided
+    elif color_type == 'blue':
         r, g, b = int(255 * (1 - score)), int(255 * (1 - score * 0.6)), 255
-    elif color_type == 'green':  # Vanilla
+    elif color_type == 'green':
         r, g, b = int(255 * (1 - score)), 255, int(255 * (1 - score))
-    else:  # Random (Purple-ish)
+    else:
         r, g, b = int(255 * (1 - score * 0.5)), int(255 * (1 - score)), 255
 
     text_color = "white" if score > 0.5 else "black"
     return f"background-color: rgb({r}, {g}, {b}); color: {text_color};"
 
 
-# ====================== 4. 主程序 ======================
-
 def main():
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
     dataset = load_from_disk(DATA_CACHE)
     val_dataset = dataset["validation"]
 
-    # --- A. 预加载所有模型 ---
     models = []
     for cfg in MODELS_CONFIG:
         path = os.path.join(CHECKPOINTS_DIR, cfg['id'], "best_model")
@@ -80,7 +73,6 @@ def main():
 
     all_samples_html = ""
 
-    # --- B. 循环处理样本 ---
     for i in range(NUM_SAMPLES):
         example = val_dataset[i]
         inputs = {k: torch.tensor(v).unsqueeze(0).to(DEVICE) for k, v in example.items() if
@@ -92,7 +84,6 @@ def main():
         f_gold = np.array(example["gold_mask"])[valid_indices]
         true_label = LABEL_MAP.get(example["label"])
 
-        # 生成各模型的比对块
         model_comparison_html = ""
         for idx, m_obj in enumerate(models):
             with torch.no_grad():
@@ -108,7 +99,6 @@ def main():
             is_correct = (example["label"] == pred_idx.item())
             res_color = "#28a745" if is_correct else "#dc3545"
 
-            # 选择不同的颜色主题
             theme = ['blue', 'green', 'purple'][idx % 3]
 
             tokens_html = "".join([
@@ -125,7 +115,6 @@ def main():
             </div>
             """
 
-        # 组装单个样本卡片
         gold_tokens_html = "".join([f'<span class="token" style="{get_color_style(s, "red")}">{html.escape(t)}</span>'
                                     for t, s in zip(f_tokens, f_gold)])
 
@@ -142,7 +131,6 @@ def main():
         </div>
         """
 
-    # --- C. 最终 HTML 包装 ---
     full_html = f"""
     <html>
     <head>
@@ -176,7 +164,7 @@ def main():
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(full_html)
-    print(f"\n✅ 成功生成多模型对比报告：{OUTPUT_FILE}")
+    print(f"\n>> Multi-model comparison report generated successfully: {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":

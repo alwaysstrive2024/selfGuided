@@ -1,4 +1,0 @@
-epoch,train_loss,val_accuracy,val_iou,mode,lambda
-2,0.281,0.9067,0.3784,guided,1.0
-2,0.2809,0.9041,0.2665,vanilla,1.0
-2,0.2801,0.9026,0.3181,random,1.0

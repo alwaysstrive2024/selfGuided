@@ -7,25 +7,22 @@ from transformers import BertTokenizerFast, BertForSequenceClassification
 from transformers.models.bert.modeling_bert import BertSelfAttention
 from datasets import load_from_disk
 
-# ====================== 1. 配置参数 ======================
 RUN_ID = "mode_random_lambda1.0_20260121_003525"
 CHECKPOINTS_DIR = "../checkpoints"
 RUN_DIR = os.path.join(CHECKPOINTS_DIR, RUN_ID)
 BEST_MODEL_PATH = os.path.join(RUN_DIR, "best_model")
 DATA_CACHE = "./data_cache/esnli_tokenized"
 
-# 输出文件名
 VIS_DIR = os.path.join("visualization/visualization_combined", RUN_ID)
 os.makedirs(VIS_DIR, exist_ok=True)
 OUTPUT_FILE = os.path.join(VIS_DIR, "combined_report.html")
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-NUM_SAMPLES = 20  # 设置你想一起对比的样本数量
+NUM_SAMPLES = 20
 
 LABEL_MAP = {0: "Entailment", 1: "Neutral", 2: "Contradiction"}
 
 
-# ====================== 2. 模型结构定义 ======================
 class GuidedBertSelfAttention(BertSelfAttention):
     def __init__(self, config, lambda_guidance=1.0):
         super().__init__(config)
@@ -44,8 +41,6 @@ class GuidedBertSelfAttention(BertSelfAttention):
         return outputs
 
 
-# ====================== 3. HTML 渲染工具 ======================
-
 def get_color_style(score, is_gold=False):
     score = max(0.0, min(1.0, score))
     if score < 0.05: return "background-color: transparent; color: black;"
@@ -58,12 +53,10 @@ def get_color_style(score, is_gold=False):
 
 
 def generate_sample_html(data):
-    """为单个样本生成 HTML 代码块"""
     is_correct = data['true_label'] == data['pred_label']
     status_class = "correct-card" if is_correct else "incorrect-card"
     status_text = "✓ CORRECT" if is_correct else "✗ INCORRECT"
 
-    # 构造 Token 序列 HTML
     attn_tokens_html = ""
     for t, raw_s, norm_s in zip(data['tokens'], data['attn_scores'], data['norm_attn']):
         style = get_color_style(norm_s, is_gold=False)
@@ -105,8 +98,6 @@ def generate_sample_html(data):
     """
 
 
-# ====================== 4. 主程序 ======================
-
 def main():
     print(">> Initializing model...")
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
@@ -125,7 +116,6 @@ def main():
     for i in range(NUM_SAMPLES):
         example = val_dataset[i]
 
-        # 模型推理
         inputs = {k: torch.tensor(v).unsqueeze(0).to(DEVICE) for k, v in example.items() if
                   k in ['input_ids', 'attention_mask']}
         with torch.no_grad():
@@ -134,7 +124,6 @@ def main():
             conf, pred_idx = torch.max(probs, dim=-1)
             attn = outputs.attentions[-1].mean(dim=1).squeeze(0).mean(dim=0)
 
-        # 准备数据
         tokens_raw = tokenizer.convert_ids_to_tokens(example["input_ids"])
         valid_indices = [idx for idx, t in enumerate(tokens_raw) if t != '[PAD]']
 
@@ -159,14 +148,10 @@ def main():
             "is_correct": is_correct
         })
 
-    # ====================== 5. 组装最终 HTML ======================
-
-    # 导航锚点
     nav_html = "".join(
         [f'<a href="#sample-{d["id"]}" class="nav-dot {"dot-err" if not d["is_correct"] else ""}">{d["id"]}</a>' for d
          in samples_data])
 
-    # 所有样本内容
     samples_html = "".join([generate_sample_html(d) for d in samples_data])
 
     full_html = f"""
@@ -228,7 +213,7 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(full_html)
 
-    print(f"\n✨ 全景报告已生成！请查看：\n{os.path.abspath(OUTPUT_FILE)}")
+    print(f"\n>> Visual report generated! Please check:\n{os.path.abspath(OUTPUT_FILE)}")
 
 
 if __name__ == "__main__":
