@@ -13,8 +13,8 @@ Traditional attention mechanisms often fail to align with human reasoning. This 
 **Direct Attention Intervention**: Implements "Soft Multiplicative Biasing" to inject human knowledge into the last four encoder layers of BERT.
 
 
-* **Explainability Metrics Pipeline**: Integrated evaluation for XAI, including:
-* 
+**Explainability Metrics Pipeline**: Integrated evaluation for XAI, including:
+  
 **Top-k Attention IoU**: Measuring alignment between model focus and human rationales.
 
 
@@ -105,8 +105,3 @@ If you find this work useful for your research or projects, please cite the orig
 ## 📄 License
 
 This project is licensed under the MIT License.
-
-
-
-3. 
-**Problem Solving**: Addresses the "Attention is not Explanation" debate by proposing a concrete intervention.
