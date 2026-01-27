@@ -13,27 +13,27 @@ Traditional attention mechanisms often fail to align with human reasoning. This 
 **Direct Attention Intervention**: Implements "Soft Multiplicative Biasing" to inject human knowledge into the last four encoder layers of BERT.
 
 
-**Explainability Metrics Pipeline**: Integrated evaluation for XAI, including:
+* **Explainability Metrics Pipeline**: Integrated evaluation for XAI, including:
   
-**Top-k Attention IoU**: Measuring alignment between model focus and human rationales.
+* **Top-k Attention IoU**: Measuring alignment between model focus and human rationales.
 
 
 
-**AUPRC**: Assessing token importance discrimination.
+* **AUPRC**: Assessing token importance discrimination.
 
 
 
-**Comprehensiveness & Sufficiency**: Quantifying the causal impact of highlighted tokens on model confidence.
+* **Comprehensiveness & Sufficiency**: Quantifying the causal impact of highlighted tokens on model confidence.
 
 
 
 
 
-**Robust Preprocessing**: Custom pipeline for aligning natural language explanations with WordPiece tokenization using BERT's offset mapping.
+* **Robust Preprocessing**: Custom pipeline for aligning natural language explanations with WordPiece tokenization using BERT's offset mapping.
 
 
 
-**Comparative Analysis Framework**: Built-in support for benchmarking against **Vanilla Fine-tuning** and **Random Attention Masking** controls.
+* **Comparative Analysis Framework**: Built-in support for benchmarking against **Vanilla Fine-tuning** and **Random Attention Masking** controls.
 
 
 
